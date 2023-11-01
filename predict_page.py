@@ -14,7 +14,7 @@ def encode_data(dataframe_series):
 
 def show_predict_page():
     st.title("Churn Predict DSW by Aruci")
-    st.write("""### Get a insight and solution by uploading your dataset! - Aruci ###""")
+    st.write(" Get a insight and solution by uploading your dataset! - Aruci ")
     
 
     #import
