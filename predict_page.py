@@ -4,6 +4,7 @@ import pickle
 from sklearn.preprocessing import LabelEncoder
 import plotly.express as px
 import plotly
+import openpyxl  
 
 
 def encode_data(dataframe_series):

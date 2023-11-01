@@ -5,6 +5,6 @@ import pickle
 from sklearn.preprocessing import LabelEncoder
 import plotly.express as px
 import plotly
-
+import openpyxl
 
 show_predict_page()
