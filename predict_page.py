@@ -13,11 +13,12 @@ def encode_data(dataframe_series):
         return dataframe_series
 
 def show_predict_page():
-    st.title("Churn Predict")
-    st.write("""### We need some data for predict ###""")
+    st.title("Churn Predict DSW by Aruci")
+    st.write("""### Get a insight and solution by uploading your dataset! - Aruci ###""")
     
 
     #import
+    st.write("""### Upload your dataset! - Aruci ###""")
     dataset_file = st.file_uploader("Upload dataset",
                                     type=['xlsx'])
     if dataset_file is not None:
@@ -126,6 +127,7 @@ def show_predict_page():
 
         #Solution
         st.write("""## Solution ##""")
+        st.write("The following are factors that cause customer churn: ")
         data_sol = dataset.drop(['customer_id','latitude','longitude','location','cltv'], axis = 1)
         data_sol = pd.concat([data_sol,df_predict],axis="columns")
         data_sol = pd.get_dummies(data_sol, dtype=int)
@@ -173,21 +175,21 @@ def show_predict_page():
             if i in internet_factor:
                 if i in internet_yes:
                     st.write("Factor Churn : ", i)
-                    st.write("Perbaikan terhadap layanan !")
+                    st.write("Solution : Perbaikan terhadap layanan !")
                 elif i in internet_no:
                     st.write("Factor Churn : ", i)
-                    st.write("Butuh promosi !")
+                    st.write("Solution : Butuh promosi !")
             elif i in payment_method:
                 if i in pulsa:
                     st.write("Factor Churn : ", i)
-                    st.write("Butuh Promosi !")
+                    st.write("Solution : Butuh Promosi !")
                 elif i in nonpulsa:
                     st.write("Factor Churn : ", i)
-                    st.write("Perbaikan terhadap layanan !")
+                    st.write("Solution : Perbaikan terhadap layanan !")
             elif i in device:
                 if i in device_low:
                     st.write("Factor Churn : ", i)
-                    st.write("Penyebab tidak diketahui!")
+                    st.write("Solution : Penyebab tidak diketahui!")
                 else:
                     st.write("Factor Churn : ", i)
-                    st.write("Perbaikan terhadap layanan !")
+                    st.write("Solution : Perbaikan terhadap layanan !")
