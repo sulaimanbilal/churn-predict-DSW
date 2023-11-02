@@ -23,7 +23,7 @@ def show_predict_page():
                                     type=['xlsx'])
     if dataset_file is not None:
         dataset = pd.read_excel(dataset_file)
-        dataset = dataset.drop(['Churn Label'],axis = 1)
+        #dataset = dataset.drop(['Churn Label'],axis = 1)
         #change nama column
         dataset.rename(columns={'Customer ID':'customer_id','Tenure Months':'tenure_months','Location':'location',
                         'Device Class':'device_class', 'Games Product':'games_product', 'Music Product' : 'music_product',
