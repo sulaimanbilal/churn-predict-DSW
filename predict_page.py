@@ -52,7 +52,8 @@ def show_predict_page():
 
         data_predict = mod.predict(x)
         df_predict = pd.DataFrame(data_predict,columns=['churn_predict'])
-
+        mapping = {0: 'No', 1: 'Yes'}
+        df_predict['churn_predict'] = df_predict['churn_predict'].replace(mapping)
         #Simple EDA
 
         data_eda = pd.concat([dataset,df_predict],axis='columns')
@@ -147,7 +148,7 @@ def show_predict_page():
 
             data_predict_loc = mod.predict(x)
             df_predict_loc = pd.DataFrame(data_predict_loc,columns=['churn_predict'])
-
+            df_predict_loc['churn_predict'] = df_predict_loc['churn_predict'].replace(mapping)
             value_churn = (df_predict_loc['churn_predict'] == 1).sum()
             value_nchurn = (df_predict_loc['churn_predict'] == 0).sum()
 
