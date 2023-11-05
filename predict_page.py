@@ -135,7 +135,7 @@ def show_predict_page():
 
         data_location = pd.DataFrame(dataset_cpy)
 
-        for i in data_location[0]:
+        for i in data_location:
             data_process_loc = dataset_cpy[dataset_cpy["location"] != i]
             data_process_loc = data_process_loc.drop(['customer_id','latitude','longitude','location','cltv'], axis = 1)
             data_process_loc = data_process_loc.apply(lambda x: encode_data(x))
