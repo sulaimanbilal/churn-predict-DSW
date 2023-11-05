@@ -52,15 +52,16 @@ def show_predict_page():
 
         data_predict = mod.predict(x)
         df_predict = pd.DataFrame(data_predict,columns=['churn_predict'])
+        df_predict_1 = df_predict.copy()
         mapping = {0: 'No', 1: 'Yes'}
-        df_predict['churn_predict'] = df_predict['churn_predict'].replace(mapping)
+        df_predict_1['churn_predict'] = df_predict_1['churn_predict'].replace(mapping)
         #Simple EDA
 
-        data_eda = pd.concat([dataset,df_predict],axis='columns')
+        data_eda = pd.concat([dataset,df_predict_1],axis='columns')
         data_eda2 = data_eda.drop(['customer_id','latitude','longitude','location','cltv'], axis = 1)
-        eda_dummies = pd.get_dummies(data_eda[['churn_predict','games_product', 'music_product', 'education_product' ,
+        data_dummies= pd.concat([dataset,df_predict],axis='columns')
+        eda_dummies = pd.get_dummies(data_dummies[['churn_predict','games_product', 'music_product', 'education_product' ,
                                             'call_center', 'video_product', 'use_myapp','device_class','payment_method']], dtype=int)
-
         st.write("""## GENERAL EDA ##""")
         #summary stat
         st.write("""Summary Stat""")
@@ -81,7 +82,7 @@ def show_predict_page():
 
         #Churn bedasarkan loc
         #Piechart churn label == yes bedasarkan lokasi
-        filtered_data = data_eda[data_eda['churn_predict'] == 1]
+        filtered_data = data_eda[data_eda['churn_predict'] == 'Yes']
 
         #Piechart churn label 
         st.write("""Piechart Churn Based on Location""")
@@ -148,7 +149,8 @@ def show_predict_page():
 
             data_predict_loc = mod.predict(x)
             df_predict_loc = pd.DataFrame(data_predict_loc,columns=['churn_predict'])
-            df_predict_loc['churn_predict'] = df_predict_loc['churn_predict'].replace(mapping)
+            df_predict_loc_1 = df_predict_loc.copy()
+            df_predict_loc_1['churn_predict'] = df_predict_loc_1['churn_predict'].replace(mapping)
             value_churn = (df_predict_loc['churn_predict'] == 1).sum()
             value_nchurn = (df_predict_loc['churn_predict'] == 0).sum()
 
@@ -156,9 +158,10 @@ def show_predict_page():
             percent_nchurn = (value_nchurn / (value_churn + value_nchurn)) * 100
 
             if percent_churn > 0.25 :
-                data_eda_loc = pd.concat([dataset,df_predict_loc],axis='columns')
+                data_eda_loc = pd.concat([dataset,df_predict_loc_1],axis='columns')
                 data_eda_loc_2 = data_eda_loc.drop(['customer_id','latitude','longitude','location','cltv'], axis = 1)
-                eda_dummies_loc = pd.get_dummies(data_eda_loc[['churn_predict','games_product', 'music_product', 'education_product' ,
+                data_dummies_loc= pd.concat([dataset,df_predict_loc],axis='columns')
+                eda_dummies_loc = pd.get_dummies(data_dummies_loc[['churn_predict','games_product', 'music_product', 'education_product' ,
                                             'call_center', 'video_product', 'use_myapp','device_class','payment_method']], dtype=int)
                 st.write("""Untuk wilayah""", i)
                 st.write("""## EDA ##""")
