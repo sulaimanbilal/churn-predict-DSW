@@ -16,9 +16,7 @@ def show_predict_page():
     st.title("Churn Predict DSW by Aruci")
     st.write(" Get a insight and solution by uploading your dataset! - Aruci ")
     
-
     #import
-    st.write("""### Upload your dataset! - Aruci ###""")
     dataset_file = st.file_uploader("Upload dataset",
                                     type=['xlsx'])
     if dataset_file is not None:
@@ -53,15 +51,18 @@ def show_predict_page():
         data_predict = mod.predict(x)
         df_predict = pd.DataFrame(data_predict,columns=['churn_predict'])
         df_predict_1 = df_predict.copy()
+        df_predict_loc = df_predict.copy()
         mapping = {0: 'No', 1: 'Yes'}
         df_predict_1['churn_predict'] = df_predict_1['churn_predict'].replace(mapping)
         #Simple EDA
 
         data_eda = pd.concat([dataset,df_predict_1],axis='columns')
+        data_eda_loc = data_eda.copy()
         data_eda2 = data_eda.drop(['customer_id','latitude','longitude','location','cltv'], axis = 1)
         data_dummies= pd.concat([dataset,df_predict],axis='columns')
         eda_dummies = pd.get_dummies(data_dummies[['churn_predict','games_product', 'music_product', 'education_product' ,
                                             'call_center', 'video_product', 'use_myapp','device_class','payment_method']], dtype=int)
+        eda_dummies_loc = eda_dummies.copy()
         st.write("""## GENERAL EDA ##""")
         #summary stat
         st.write("""Summary Stat""")
@@ -133,34 +134,20 @@ def show_predict_page():
 
 
         data_location = dataset_cpy['location'].unique()
-
+        st.write(data_location)
         for i in data_location:
-            data_process_loc = dataset_cpy[dataset_cpy["location"] != i]
-            data_process_loc = data_process_loc.drop(['customer_id','latitude','longitude','location','cltv'], axis = 1)
-            data_process_loc = data_process_loc.apply(lambda x: encode_data(x))
-            scaler = StandardScaler()
-
-            data_process_loc[['monthly_purchase','tenure_months']] = scaler.fit_transform(data_process_loc[['monthly_purchase','tenure_months']])
-
-            x = data_process_loc.values
-    
-            with open('modelv2','rb') as m :
-                mod = pickle.load(m)
-
-            data_predict_loc = mod.predict(x)
-            df_predict_loc = pd.DataFrame(data_predict_loc,columns=['churn_predict'])
-            df_predict_loc_1 = df_predict_loc.copy()
-            df_predict_loc_1['churn_predict'] = df_predict_loc_1['churn_predict'].replace(mapping)
-            value_churn = (df_predict_loc['churn_predict'] == 1).sum()
-            value_nchurn = (df_predict_loc['churn_predict'] == 0).sum()
+            data_process_loc = data_eda_loc[data_eda_loc["location"] == i]
+            
+            value_churn = (data_process_loc['churn_predict'] == 'Yes').sum()
+            value_nchurn = (data_process_loc['churn_predict'] == 'No').sum()
 
             percent_churn = (value_churn / (value_churn + value_nchurn)) * 100
             percent_nchurn = (value_nchurn / (value_churn + value_nchurn)) * 100
 
-            if percent_churn > 0.25 :
-                data_eda_loc = pd.concat([dataset,df_predict_loc_1],axis='columns')
+            
+            if percent_churn >= 0.25 :
                 data_eda_loc_2 = data_eda_loc.drop(['customer_id','latitude','longitude','location','cltv'], axis = 1)
-                data_dummies_loc= pd.concat([dataset,df_predict_loc],axis='columns')
+                data_dummies_loc= pd.concat([dataset[dataset["location"] == i],df_predict],axis='columns')
                 eda_dummies_loc = pd.get_dummies(data_dummies_loc[['churn_predict','games_product', 'music_product', 'education_product' ,
                                             'call_center', 'video_product', 'use_myapp','device_class','payment_method']], dtype=int)
                 st.write("""Untuk wilayah""", i)
@@ -170,26 +157,26 @@ def show_predict_page():
                 st.write(data_eda_loc_2.describe())
                 #Piechart churn label 
                 st.write("""Piechart churn label""")
-                fig = px.pie(data_eda_loc.groupby('churn_predict')['customer_id'].nunique().reset_index(), 
+                fig = px.pie(data_process_loc.groupby('churn_predict')['customer_id'].nunique().reset_index(), 
                     values='customer_id', 
                     names='churn_predict')
                 st.write(fig)
 
                 #Customer lifetime
                 st.write("""Bar Chart Customer Lifetime""")
-                fig_lt = px.histogram(data_eda_loc, x="tenure_months", color="churn_predict",marginal="box" )
+                fig_lt = px.histogram(data_process_loc, x="tenure_months", color="churn_predict",marginal="box" )
                 st.write(fig_lt)
 
                 #Monthly purchase Customer
                 st.write("""Bar Chart Monthly Purchase Customer""")
-                fig_mp = px.histogram(data_eda_loc, x="monthly_purchase", color="churn_predict",
+                fig_mp = px.histogram(data_process_loc, x="monthly_purchase", color="churn_predict",
                     marginal="box"
                     )
                 st.write(fig_mp)
 
                 #Bar Chart Payment Method Churn
                 st.write("""Bar Chart Payment Method Churn""")
-                fig_pmc = px.bar(data_eda_loc.groupby(['payment_method',
+                fig_pmc = px.bar(data_process_loc.groupby(['payment_method',
                                                     'churn_predict'])['customer_id'].count().reset_index(),
                     x="customer_id",
                     y="payment_method", 
@@ -272,6 +259,7 @@ def show_predict_page():
                         else:
                             st.write("Factor Churn : ", f)
                             st.write("Solution : Perbaikan terhadap layanan !")
-
             else:
-                pass
+                st.write(percent_churn)
+                st.write(percent_nchurn)
+        return()
