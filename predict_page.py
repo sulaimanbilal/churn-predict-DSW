@@ -71,7 +71,7 @@ def show_predict_page():
         st.write("""Summary Stat""")
         st.write(data_eda2.describe())
         #Piechart churn label 
-        st.write("""Piechart churn predict""")
+        st.write("""Piechart Churn Predict""")
         fig = px.pie(data_eda.groupby('churn_predict')['customer_id'].nunique().reset_index(), 
              values='customer_id', 
              names='churn_predict')
@@ -162,7 +162,7 @@ def show_predict_page():
                 st.write("""Summary Stat""")
                 st.write(data_eda_loc_2.describe())
                 #Piechart churn label 
-                st.write("""Piechart churn Predict """)
+                st.write("""Piechart Churn Predict """)
                 fig_loc = px.pie(data_process_loc.groupby('churn_predict')['customer_id'].nunique().reset_index(), 
                     values='customer_id', 
                     names='churn_predict')
