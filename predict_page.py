@@ -237,7 +237,7 @@ def show_predict_page():
                 for f in factor['factor'] :
                     if f in internet_factor:
                         if f in internet_yes:
-                            if data_mp_churn > mp_nchurn :
+                            if mp_churn > mp_nchurn :
                                 st.write("Factor Churn : ", f)
                                 st.write("Solution : ")
                                 st.write("- There is a problem with the internet service, you are expected to fix the internet service. Do not forget to communicate customers to use the call center service if there is a problem. ")
@@ -258,18 +258,40 @@ def show_predict_page():
                                 st.write("- The company may need to promote the use of internet services, this may reduce customers will churn. Do not forget to communicate customers to use the call center service if there is a problem. ")
                     elif f in payment_method:
                         if f in pulsa:
-                            st.write("Factor Churn : ", f)
-                            st.write("Solution : Payment using credit is less efficient, the company may need to promote the use of electronic payment, this may reduce customers will churn. Do not forget to communicate customers to use the call center service if there is a problem. ")
+                            if mp_churn > mp_nchurn :
+                                st.write("Factor Churn : ", f)
+                                st.write("Solution :")
+                                st.write("- Payment using credit is less efficient, the company may need to promote the use of electronic payment, this may reduce customers will churn. Do not forget to communicate customers to use the call center service if there is a problem. ")
+                                st.write("- Since the median purchase of customers who churn is greater than the median purchase of customers who do not churn, perhaps the price of the service is too high and not commensurate with the service provided. Offering a discount or lowering the price might solve this. ")
+                            else:
+                                st.write("Factor Churn : ", f)
+                                st.write("Solution :")
+                                st.write("- Payment using credit is less efficient, the company may need to promote the use of electronic payment, this may reduce customers will churn. Do not forget to communicate customers to use the call center service if there is a problem. ")
                         elif f in nonpulsa:
-                            st.write("Factor Churn : ", f)
-                            st.write("Solution : There are problems in using electronic payments, the company is advised to make technical improvements to electronic payments.  Do not forget to communicate customers to use the call center service if there is a problem. ")
+                            if mp_churn > mp_nchurn :
+                                st.write("Factor Churn : ", f)
+                                st.write("Solution : ")
+                                st.write("- There are problems in using electronic payments, the company is advised to make technical improvements to electronic payments.  Do not forget to communicate customers to use the call center service if there is a problem. ")
+                                st.write("- Since the median purchase of customers who churn is greater than the median purchase of customers who do not churn, perhaps the price of the service is too high and not commensurate with the service provided. Offering a discount or lowering the price might solve this. ")
+                            else:
+                                st.write("Factor Churn : ", f)
+                                st.write("Solution : ")
+                                st.write("- There are problems in using electronic payments, the company is advised to make technical improvements to electronic payments.  Do not forget to communicate customers to use the call center service if there is a problem. ")
                     elif f in device:
                         if f in device_low:
-                            st.write("Factor Churn : ", f)
-                            st.write("Solution : There is no information that can be known, this is due to the device used by the customer or something else. Do not forget to communicate customers to use the call center service if there is a problem.")
+                                st.write("Factor Churn : ", f)
+                                st.write("Solution : ")
+                                st.write("- There is no information that can be known, this is due to the device used by the customer or something else. Do not forget to communicate customers to use the call center service if there is a problem.")
                         else:
-                            st.write("Factor Churn : ", f)
-                            st.write("Solution : Perbaikan terhadap layanan !")
+                            if mp_churn > mp_nchurn:
+                                st.write("Factor Churn : ", f)
+                                st.write("Solution : ")
+                                st.write("- Internet services may not be compatible with their devices, try to improve and repair internet services.")
+                                st.write("- Since the median purchase of customers who churn is greater than the median purchase of customers who do not churn, perhaps the price of the service is too high and not commensurate with the service provided. Offering a discount or lowering the price might solve this. ")
+                            else:
+                                st.write("Factor Churn : ", f)
+                                st.write("Solution : ")
+                                st.write("- Internet services may not be compatible with their devices, try to improve and repair internet services.")
                     elif f in service_factor:
                         st.write("Solution : Perbaikan terhadap layanan !")
             else:
