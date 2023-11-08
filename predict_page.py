@@ -71,7 +71,7 @@ def show_predict_page():
         st.write("""Summary Stat""")
         st.write(data_eda2.describe())
         #Piechart churn label 
-        st.write("""Piechart churn label""")
+        st.write("""Piechart churn predict""")
         fig = px.pie(data_eda.groupby('churn_predict')['customer_id'].nunique().reset_index(), 
              values='customer_id', 
              names='churn_predict')
@@ -89,26 +89,26 @@ def show_predict_page():
         filtered_data = data_eda[data_eda['churn_predict'] == 'Yes']
 
         #Piechart churn label 
-        st.write("""Piechart Churn Based on Location""")
+        st.write("""Piechart Churn Predict Based on Location""")
         fig_churn_loc = px.pie(filtered_data.groupby('location')['customer_id'].count().reset_index(), 
              values= 'customer_id', 
              names= 'location')
         st.write(fig_churn_loc)
 
         #Customer lifetime
-        st.write("""Bar Chart Customer Lifetime""")
+        st.write("""Bar Chart Customer Lifetime (Based On Churn Predict) """)
         fig_lt = px.histogram(data_eda, x="tenure_months", color="churn_predict",marginal="box" )
         st.write(fig_lt)
 
         #Monthly purchase Customer
-        st.write("""Bar Chart Monthly Purchase Customer""")
+        st.write("""Bar Chart Monthly Purchase Customer (Based On Churn Predict) """)
         fig_mp = px.histogram(data_eda, x="monthly_purchase", color="churn_predict",
                    marginal="box"
                   )
         st.write(fig_mp)
 
         #Bar Chart Payment Method Churn
-        st.write("""Bar Chart Payment Method Churn""")
+        st.write("""Bar Chart Payment Method Churn (Based On Churn Predict) """)
         fig_pmc = px.bar(data_eda.groupby(['payment_method',
                                                 'churn_predict'])['customer_id'].count().reset_index(),
              x="customer_id",
@@ -119,7 +119,7 @@ def show_predict_page():
         st.write(fig_pmc)
 
         #Chart factor churn
-        st.write("""Bar Chart Factor Churn""")
+        st.write("""Bar Chart Factor Churn (Based On Churn Predict)""")
         fig_fc = px.bar(eda_dummies.corr()['churn_predict'].sort_values(ascending = False), 
              color = 'value')
         st.write(fig_fc)
@@ -162,14 +162,14 @@ def show_predict_page():
                 st.write("""Summary Stat""")
                 st.write(data_eda_loc_2.describe())
                 #Piechart churn label 
-                st.write("""Piechart churn label""")
+                st.write("""Piechart churn Predict """)
                 fig_loc = px.pie(data_process_loc.groupby('churn_predict')['customer_id'].nunique().reset_index(), 
                     values='customer_id', 
                     names='churn_predict')
                 st.write(fig_loc)
 
                 #Monthly purchase Customer
-                st.write("""Bar Chart Monthly Purchase Customer""")
+                st.write("""Bar Chart Monthly Purchase Customer (Based On Churn Predict)""")
                 fig_mp_loc = px.histogram(data_process_loc, x="monthly_purchase", color="churn_predict",
                     marginal="box"
                     )
@@ -182,7 +182,7 @@ def show_predict_page():
                 mp_nchurn =data_mp_nchurn['monthly_purchase'].median()
 
                 #Chart factor churn
-                st.write("""Bar Chart Factor Churn""")
+                st.write("""Bar Chart Factor Churn (Based On Churn Predict)""")
                 fig_fc_loc = px.bar(eda_dummies_loc.corr()['churn_predict'].sort_values(ascending = False), 
                     color = 'value')
                 st.write(fig_fc_loc)
