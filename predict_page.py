@@ -239,19 +239,23 @@ def show_predict_page():
                         if f in internet_yes:
                             if data_mp_churn > mp_nchurn :
                                 st.write("Factor Churn : ", f)
-                                st.write("Solution : - There is a problem with the internet service, you are expected to fix the internet service. Do not forget to communicate customers to use the call center service if there is a problem. ")
-                                st.write("           - Since the median purchase of customers who churn is greater than the median purchase of customers who do not churn, perhaps the price of the service is too high and not commensurate with the service provided. Offering a discount or lowering the price might solve this. ")
+                                st.write("Solution : ")
+                                st.write("- There is a problem with the internet service, you are expected to fix the internet service. Do not forget to communicate customers to use the call center service if there is a problem. ")
+                                st.write("- Since the median purchase of customers who churn is greater than the median purchase of customers who do not churn, perhaps the price of the service is too high and not commensurate with the service provided. Offering a discount or lowering the price might solve this. ")
                             else:
                                 st.write("Factor Churn : ", f)
-                                st.write("Solution : - There is a problem with the internet service, you are expected to fix the internet service. Do not forget to communicate customers to use the call center service if there is a problem. ")
+                                st.write("Solution : ")
+                                st.write("- There is a problem with the internet service, you are expected to fix the internet service. Do not forget to communicate customers to use the call center service if there is a problem. ")
                         elif f in internet_no:
                             if mp_churn > mp_nchurn :
                                 st.write("Factor Churn : ", f)
-                                st.write("Solution : The company may need to promote the use of internet services, this may reduce customers will churn. Do not forget to communicate customers to use the call center service if there is a problem. ")
-                                st.write("           - Since the median purchase of customers who churn is greater than the median purchase of customers who do not churn, perhaps the price of the service is too high and not commensurate with the service provided. Offering a discount or lowering the price might solve this. ")
+                                st.write("Solution : ")
+                                st.write("- The company may need to promote the use of internet services, this may reduce customers will churn. Do not forget to communicate customers to use the call center service if there is a problem. ")
+                                st.write("- Since the median purchase of customers who churn is greater than the median purchase of customers who do not churn, perhaps the price of the service is too high and not commensurate with the service provided. Offering a discount or lowering the price might solve this. ")
                             else:
                                 st.write("Factor Churn : ", f)
-                                st.write("Solution : The company may need to promote the use of internet services, this may reduce customers will churn. Do not forget to communicate customers to use the call center service if there is a problem. ") 
+                                st.write("Solution : ")
+                                st.write("- The company may need to promote the use of internet services, this may reduce customers will churn. Do not forget to communicate customers to use the call center service if there is a problem. ")
                     elif f in payment_method:
                         if f in pulsa:
                             st.write("Factor Churn : ", f)
