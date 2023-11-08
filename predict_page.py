@@ -154,6 +154,8 @@ def show_predict_page():
                                             'call_center', 'video_product', 'use_myapp','device_class','payment_method']], dtype=int)
                 with colT2:
                     st.subheader(" Region : " + i)
+
+                    
                 st.write("""## EDA ##""")
                 #summary stat
                 st.write("""Summary Stat""")
