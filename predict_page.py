@@ -175,6 +175,10 @@ def show_predict_page():
                     )
                 st.write(fig_mp)
 
+                data_mp_churn = (data_process_loc['churn_predict'] == 'Yes'  )     
+                mp_churn = data_mp_churn['monthly_purchase'].mean()   
+                st.write(mp_churn) 
+
                 #Chart factor churn
                 st.write("""Bar Chart Factor Churn""")
                 fig_fc = px.bar(eda_dummies_loc.corr()['churn_predict'].sort_values(ascending = False), 
