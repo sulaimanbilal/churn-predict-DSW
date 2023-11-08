@@ -163,17 +163,17 @@ def show_predict_page():
                 st.write(data_eda_loc_2.describe())
                 #Piechart churn label 
                 st.write("""Piechart churn label""")
-                fig = px.pie(data_process_loc.groupby('churn_predict')['customer_id'].nunique().reset_index(), 
+                fig_loc = px.pie(data_process_loc.groupby('churn_predict')['customer_id'].nunique().reset_index(), 
                     values='customer_id', 
                     names='churn_predict')
-                st.write(fig)
+                st.write(fig_loc)
 
                 #Monthly purchase Customer
                 st.write("""Bar Chart Monthly Purchase Customer""")
-                fig_mp = px.histogram(data_process_loc, x="monthly_purchase", color="churn_predict",
+                fig_mp_loc = px.histogram(data_process_loc, x="monthly_purchase", color="churn_predict",
                     marginal="box"
                     )
-                st.write(fig_mp)
+                st.write(fig_mp_loc)
 
                 data_mp_churn = (data_process_loc[data_process_loc['churn_predict'] == 'Yes']  )     
                 mp_churn = data_mp_churn['monthly_purchase'].median() 
@@ -183,9 +183,9 @@ def show_predict_page():
 
                 #Chart factor churn
                 st.write("""Bar Chart Factor Churn""")
-                fig_fc = px.bar(eda_dummies_loc.corr()['churn_predict'].sort_values(ascending = False), 
+                fig_fc_loc = px.bar(eda_dummies_loc.corr()['churn_predict'].sort_values(ascending = False), 
                     color = 'value')
-                st.write(fig_fc)
+                st.write(fig_fc_loc)
 
                 #Solution
                 st.write("""## Solution ##""")
