@@ -13,7 +13,10 @@ def encode_data(dataframe_series):
         return dataframe_series
 
 def show_predict_page():
-    st.title("Churn Predict DSW by Aruci")
+    colT1,colT2 = st.columns([1,8])
+    with colT2:
+        st.title("Churn Predict DSW by Aruci")
+        
     st.write(" Get a insight and solution by uploading your dataset! - Aruci ")
     
     #import
