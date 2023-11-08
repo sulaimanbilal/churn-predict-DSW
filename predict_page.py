@@ -16,7 +16,7 @@ def show_predict_page():
     colT1,colT2 = st.columns([1,8])
     with colT2:
         st.title("Churn Predict DSW by Aruci")
-        
+
     st.write(" Get a insight and solution by uploading your dataset! - Aruci ")
     
     #import
@@ -243,21 +243,21 @@ def show_predict_page():
                     if f in internet_factor:
                         if f in internet_yes:
                             st.write("Factor Churn : ", f)
-                            st.write("Solution : Perbaikan terhadap layanan !")
+                            st.write("Solution : There is a problem with the internet service, you are expected to fix the internet service. Do not forget to communicate customers to use the call center service if there is a problem. ")
                         elif f in internet_no:
                             st.write("Factor Churn : ", f)
-                            st.write("Solution : Butuh promosi !")
+                            st.write("Solution : The company may need to promote the use of internet services, this may reduce customers will churn. Do not forget to communicate customers to use the call center service if there is a problem. ")
                     elif f in payment_method:
                         if f in pulsa:
                             st.write("Factor Churn : ", f)
-                            st.write("Solution : Butuh Promosi !")
+                            st.write("Solution : Payment using credit is less efficient, the company may need to promote the use of electronic payment, this may reduce customers will churn. Do not forget to communicate customers to use the call center service if there is a problem. ")
                         elif f in nonpulsa:
                             st.write("Factor Churn : ", f)
-                            st.write("Solution : Perbaikan terhadap layanan !")
+                            st.write("Solution : There are problems in using electronic payments, the company is advised to make technical improvements to electronic payments.  Do not forget to communicate customers to use the call center service if there is a problem. ")
                     elif f in device:
                         if f in device_low:
                             st.write("Factor Churn : ", f)
-                            st.write("Solution : Penyebab tidak diketahui!")
+                            st.write("Solution : There is no information that can be known, this is due to the device used by the customer or something else. Do not forget to communicate customers to use the call center service if there is a problem.")
                         else:
                             st.write("Factor Churn : ", f)
                             st.write("Solution : Perbaikan terhadap layanan !")
