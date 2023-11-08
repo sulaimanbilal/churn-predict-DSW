@@ -63,7 +63,7 @@ def show_predict_page():
         eda_dummies = pd.get_dummies(data_dummies[['churn_predict','games_product', 'music_product', 'education_product' ,
                                             'call_center', 'video_product', 'use_myapp','device_class','payment_method']], dtype=int)
         eda_dummies_loc = eda_dummies.copy()
-        st.write("""## GENERAL EDA ##""")
+        st.subheader(""" GENERAL EDA """)
         #summary stat
         st.write("""Summary Stat""")
         st.write(data_eda2.describe())
@@ -149,7 +149,7 @@ def show_predict_page():
                 data_dummies_loc= pd.concat([dataset[dataset["location"] == i],df_predict],axis='columns')
                 eda_dummies_loc = pd.get_dummies(data_dummies_loc[['churn_predict','games_product', 'music_product', 'education_product' ,
                                             'call_center', 'video_product', 'use_myapp','device_class','payment_method']], dtype=int)
-                st.write(""" Untuk wilayah """, i)
+                st.subheader(" Untuk wilayah", i)
                 st.write("""## EDA ##""")
                 #summary stat
                 st.write("""Summary Stat""")
