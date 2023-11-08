@@ -176,7 +176,7 @@ def show_predict_page():
                 st.write(fig_mp)
 
                 data_mp_churn = (data_process_loc['churn_predict'] == 'Yes'  )     
-                mp_churn = pd.DataFrame(data_mp_churn).mean()
+                mp_churn = pd.DataFrame(data_mp_churn).median()
                 st.write(mp_churn) 
 
                 #Chart factor churn
