@@ -153,7 +153,7 @@ def show_predict_page():
                 eda_dummies_loc = pd.get_dummies(data_dummies_loc[['churn_predict','games_product', 'music_product', 'education_product' ,
                                             'call_center', 'video_product', 'use_myapp','device_class','payment_method']], dtype=int)
                 
-                colT1,colT2 = st.columns([1,5])
+                colT1,colT2 = st.columns([4,5])
                 with colT2:
                     st.subheader(" Region : " + i)
                     
