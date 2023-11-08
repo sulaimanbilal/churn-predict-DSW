@@ -168,28 +168,12 @@ def show_predict_page():
                     names='churn_predict')
                 st.write(fig)
 
-                #Customer lifetime
-                st.write("""Bar Chart Customer Lifetime""")
-                fig_lt = px.histogram(data_process_loc, x="tenure_months", color="churn_predict",marginal="box" )
-                st.write(fig_lt)
-
                 #Monthly purchase Customer
                 st.write("""Bar Chart Monthly Purchase Customer""")
                 fig_mp = px.histogram(data_process_loc, x="monthly_purchase", color="churn_predict",
                     marginal="box"
                     )
                 st.write(fig_mp)
-
-                #Bar Chart Payment Method Churn
-                st.write("""Bar Chart Payment Method Churn""")
-                fig_pmc = px.bar(data_process_loc.groupby(['payment_method',
-                                                    'churn_predict'])['customer_id'].count().reset_index(),
-                    x="customer_id",
-                    y="payment_method", 
-                    color="churn_predict", 
-                    text = 'customer_id'
-                    )
-                st.write(fig_pmc)
 
                 #Chart factor churn
                 st.write("""Bar Chart Factor Churn""")
@@ -240,8 +224,9 @@ def show_predict_page():
 
                 device_low = ['device_class_Low End']
 
+                service_factor = ['call_center_No','call_center_Yes', 'use_myapp_Yes','use_myapp_No']
 
-
+                
                 #get solution
                 for f in factor['factor'] :
                     if f in internet_factor:
@@ -265,6 +250,8 @@ def show_predict_page():
                         else:
                             st.write("Factor Churn : ", f)
                             st.write("Solution : Perbaikan terhadap layanan !")
+                    elif f in service_factor:
+                        st.write("Solution : Perbaikan terhadap layanan !")
             else:
                 st.write(percent_churn)
                 st.write(percent_nchurn)
