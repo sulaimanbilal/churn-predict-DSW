@@ -48,7 +48,7 @@ def show_predict_page():
 
         x = data_procces.values
     
-        with open('modelv2','rb') as m :
+        with open('model','rb') as m :
             mod = pickle.load(m)
 
         data_predict = mod.predict(x)
