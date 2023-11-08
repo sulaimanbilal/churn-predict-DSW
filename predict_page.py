@@ -134,7 +134,6 @@ def show_predict_page():
 
 
         data_location = dataset_cpy['location'].unique()
-        st.write(data_location)
         for i in data_location:
             data_process_loc = data_eda_loc[data_eda_loc["location"] == i]
             
@@ -150,7 +149,7 @@ def show_predict_page():
                 data_dummies_loc= pd.concat([dataset[dataset["location"] == i],df_predict],axis='columns')
                 eda_dummies_loc = pd.get_dummies(data_dummies_loc[['churn_predict','games_product', 'music_product', 'education_product' ,
                                             'call_center', 'video_product', 'use_myapp','device_class','payment_method']], dtype=int)
-                st.write("""Untuk wilayah""", i)
+                st.write("""#### Untuk wilayah ###""", i)
                 st.write("""## EDA ##""")
                 #summary stat
                 st.write("""Summary Stat""")
