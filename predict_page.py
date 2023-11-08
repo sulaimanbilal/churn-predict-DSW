@@ -176,8 +176,10 @@ def show_predict_page():
                 st.write(fig_mp)
 
                 data_mp_churn = (data_process_loc[data_process_loc['churn_predict'] == 'Yes']  )     
-                mp_churn = pd.DataFrame(data_mp_churn['monthly_purchase']).median()
-                st.write(mp_churn) 
+                mp_churn = pd.DataFrame(data_mp_churn['monthly_purchase']).median() 
+
+                data_mp_nchurn = (data_process_loc[data_process_loc['churn_predict'] == 'No']  )     
+                mp_nchurn = pd.DataFrame(data_mp_nchurn['monthly_purchase']).median()
 
                 #Chart factor churn
                 st.write("""Bar Chart Factor Churn""")
