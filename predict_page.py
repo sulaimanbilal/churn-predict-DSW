@@ -277,6 +277,7 @@ def show_predict_page():
                     elif f in service_factor:
                         st.write("Solution : Perbaikan terhadap layanan !")
             else:
+                st.write("There is no need for improvement because the churn potential does not exceed 25%")
                 st.write(percent_churn)
                 st.write(percent_nchurn)
         return()
